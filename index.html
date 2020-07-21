@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <div id="r_video_app">
+    <div class="r_video_">
+      <div id="r_video_ctn" class="r_video_ctn">
+        <div class="r_video_row">
+          <div class="r_video_content">
+            <div class="r_cover" @click="plsyState()"></div>
+            <loading></loading>
+            <div id="iframe_ctn" class="iframe_ctn" :class="(getIsFullScreen? 'full' : '')">
+            </div>
+            <div class="r_video_ctrol">
+              <video-time-bar></video-time-bar>
+              <div class=" r_ctrols">
+                <div class="left_ctrols">
+                  <play-btn></play-btn>
+                  <volume-control></volume-control>
+                  <video-skip-second></video-skip-second>
+                  <video-play-time></video-play-time>
+                </div><!-- end left_ctrols -->
+                <div class="right_ctrols">
+                  <video-quality></video-quality>
+                  <video-speed></video-speed>
+                  <video-screen></video-screen>
+                </div><!-- end r_ctrols -->
+              </div><!-- end r_video_ctrol -->
+            </div><!-- end r_video_content -->
+          </div><!-- end r_video_content -->
+        </div><!-- end r_video_row -->
+      </div><!-- end r_video_ctn -->
+      <div class="r_video_list_ctn">
+        <div class="r_video_list" v-cloak>
+          <div class="video_list" v-for="item in mediaList" :key="item.id" @click="changeMedia(item)">
+            <img class="poster" :src="item.poster" />
+            <div class="title">{{item.title}}</div>
+          </div><!-- end video_list -->
+        </div><!-- end r_video_list -->
+      </div><!-- end r_video_list_ctn -->
+    </div>
+    <div class="ga">
+      <div>
+        <span v-cloak>暫停次數 : {{getMaPausedCount}} 次</span>
+        <div>暫停紀錄 </div>
+        <div v-for="item in getMaPausedTimeCode" v-cloak>
+          <span>暫停時間點: {{item.timeCode}} </span>
+        </div>
+      </div>
+      <div>
+        <span v-cloak>快進 : {{getMaForwardCount}} 次</span>
+        <div>快進紀錄 </div>
+        <div v-for="item in getMaForwardTimeCode" v-cloak>
+          <span>開始時間點: {{item.startTime}} </span>
+          <span>結束時間點: {{item.endTime}} </span>
+        </div>
+      </div>
+      <div>
+        <span v-cloak>倒退 : {{getMaBackwardCount}} 次</span>
+        <div>倒退紀錄 </div>
+        <div v-for="item in getMaBackwardTimeCode" v-cloak>
+          <span>開始時間點: {{item.startTime}} </span>
+          <span>結束時間點: {{item.endTime}} </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="./js/SDK/vimeoSDK.js"></script>
+<script src="./js/SDK/vue.js"></script>
+<script src="./js/index.bundle.js"></script>
+<script src="./js/main.bundle.js"> </script>
+
+</html>
